@@ -18,6 +18,7 @@ This is a technical challenge developed for SDi, using Laravel 12 and Sail. It c
 git clone https://github.com/trzaskos/sdi-laravel-spotify-api.git
 cd sdi-laravel-spotify-api
 ./vendor/bin/sail up -d
+./vendor/bin/sail composer install
 ```
 
 Create a `.env` file and configure your Spotify credentials:

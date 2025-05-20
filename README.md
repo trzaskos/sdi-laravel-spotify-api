@@ -17,3 +17,17 @@ This is a technical challenge developed for SDi, using Laravel 11 and Sail. It c
 git clone https://github.com/trzaskos/sdi-laravel-spotify-api.git
 cd sdi-laravel-spotify-api
 ./vendor/bin/sail up -d
+
+## 🔀 Branching Strategy
+
+We use Git branches and commit messages in English.
+
+- `feature/feature-name`
+- `fix/issue-description`
+- `test/unit-tests-for-x`
+- `chore/update-readme`
+
+Example commits:
+- `feat: Add endpoint to fetch Spotify artist by name`
+- `fix: Handle missing token error`
+- `test: Add test for SpotifyService`

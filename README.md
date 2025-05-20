@@ -28,7 +28,7 @@ cp .env.example .env
 ./vendor/bin/sail artisan key:generate
 ```
 
-# 🗝️ Set your Spotify API credentials in the .env file
+## 🗝️ Set your Spotify API credentials in the .env file
 ```bash
 SPOTIFY_CLIENT_ID=your-client-id
 SPOTIFY_CLIENT_SECRET=your-client-secret

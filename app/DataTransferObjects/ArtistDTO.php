@@ -26,4 +26,16 @@ class ArtistDTO
             source: MusicSource::SPOTIFY,
         );
     }
+
+    public static function fromYouTube(array $data): self
+    {
+        return new self(
+            id: $data['id'],
+            name: $data['name'],
+            popularity: $data['popularity'] ?? null,
+            genres: $data['genres'] ?? [],
+            image: $data['imageUrl'] ?? null,
+            source: MusicSource::YOUTUBE,
+        );
+    }
 }

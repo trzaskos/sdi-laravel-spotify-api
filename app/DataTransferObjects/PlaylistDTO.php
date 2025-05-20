@@ -26,4 +26,16 @@ class PlaylistDTO
             source: MusicSource::SPOTIFY,
         );
     }
+
+    public static function fromYouTube(array $data): self
+    {
+        return new self(
+            id: $data['id'],
+            name: $data['name'],
+            description: $data['description'] ?? null,
+            image: $data['image'] ?? null,
+            tracks: $data['tracks'] ?? [],
+            source: MusicSource::YOUTUBE,
+        );
+    }
 }

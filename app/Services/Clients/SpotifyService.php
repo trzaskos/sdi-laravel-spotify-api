@@ -47,7 +47,7 @@ class SpotifyService extends BaseMusicServiceWithToken implements MusicServiceIn
         ]);
 
         return collect($data['tracks']['items'])
-            ->map(fn($item) => TrackDTO::fromArray($item, $this->source->value))
+            ->map(fn($item) => TrackDTO::fromSpotify($item, $this->source->value))
             ->all();
     }
 
@@ -55,7 +55,7 @@ class SpotifyService extends BaseMusicServiceWithToken implements MusicServiceIn
     {
         $data = $this->get(SpotifyEndpoints::GET_TRACK->withId($trackId));
 
-        return TrackDTO::fromArray($data, $this->source->value);
+        return TrackDTO::fromSpotify($data, $this->source->value);
     }
 
     public function getAlbumsByArtist(string $artistId): array
@@ -65,7 +65,7 @@ class SpotifyService extends BaseMusicServiceWithToken implements MusicServiceIn
         ]);
 
         return collect($data['items'])
-            ->map(fn($item) => AlbumDTO::fromArray($item, $this->source->value))
+            ->map(fn($item) => AlbumDTO::fromSpotify($item, $this->source->value))
             ->all();
     }
 
@@ -76,7 +76,7 @@ class SpotifyService extends BaseMusicServiceWithToken implements MusicServiceIn
         ]);
 
         return collect($data['tracks'])
-            ->map(fn($item) => TrackDTO::fromArray($item, $this->source->value))
+            ->map(fn($item) => TrackDTO::fromSpotify($item, $this->source->value))
             ->all();
     }
 }

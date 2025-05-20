@@ -8,7 +8,7 @@ class SearchArtistRequest extends BaseMusicRequest
 {
     /**
      * @queryParam query string required The artist name to search. Example: drake
-     * @queryParam source string optional The music provider (spotify, youtube, deezer). Defaults to spotify. Example: spotify
+     * @queryParam source string optional The music provider (spotify, youtube). Defaults to spotify. Example: spotify
      * @header Authorization string required Bearer token
      * @header Accept string required Must be application/json
      *

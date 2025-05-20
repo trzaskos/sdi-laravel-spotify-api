@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MusicController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 
@@ -12,4 +13,9 @@ Route::prefix('auth')->group(function () {
 
     // Logout (protected)
     Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+});
+
+Route::prefix('music')->group(function () {
+    Route::get('/artists', [MusicController::class, 'searchArtists']);
+    Route::get('/playlists/{id}', [MusicController::class, 'getPlaylist']);
 });

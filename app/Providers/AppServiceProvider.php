@@ -11,7 +11,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(
+            \App\Services\MusicServiceInterface::class,
+            \App\Services\SpotifyService::class
+        );
     }
 
     /**

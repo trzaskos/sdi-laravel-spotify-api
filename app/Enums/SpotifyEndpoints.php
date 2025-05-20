@@ -5,7 +5,7 @@ namespace App\Enums;
 enum SpotifyEndpoints: string
 {
     case SEARCH = 'search';
-    case PLAYLIST = 'playlist';
+    case PLAYLIST = 'playlists';
 
     public function withId(string $id): string
     {

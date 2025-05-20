@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Enums\MusicSource;
+use App\Exceptions\MusicApiException;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\MusicServiceInterface;
 use App\Services\Resolvers\MusicServiceResolver;
@@ -42,8 +43,11 @@ class MusicController extends Controller
 
     public function getPlaylist(string $id): JsonResponse
     {
-        return response()->json(
-            $this->musicService->getPlaylist($id)
-        );
+        try {
+            $playlist = $this->musicService->getPlaylist($id);
+            return response()->json($playlist);
+        } catch (MusicApiException $ex) {
+            return response()->json(['message' => $ex->getMessage()], $ex->getCode() ?: 500);
+        }
     }
 }

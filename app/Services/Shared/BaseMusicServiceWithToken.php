@@ -3,6 +3,7 @@
 namespace App\Services\Shared;
 
 use App\Enums\MusicSource;
+use App\Exceptions\MusicApiException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
@@ -25,7 +26,7 @@ abstract class BaseMusicServiceWithToken extends AbstractMusicHttpService
             ]);
 
             if (!$response->successful()) {
-                throw new RuntimeException("Failed to authenticate with {$this->source->value} API.");
+                throw new MusicApiException("Failed to authenticate with {$this->source->value} API.");
             }
 
             return $response->json('access_token');

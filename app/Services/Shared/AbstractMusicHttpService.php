@@ -2,6 +2,7 @@
 
 namespace App\Services\Shared;
 
+use App\Exceptions\MusicApiException;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
@@ -13,7 +14,7 @@ abstract class AbstractMusicHttpService
             ->get($this->buildUrl($endpoint), $params);
 
         if (!$response->successful()) {
-            throw new RuntimeException("GET $endpoint failed: " . $response->body());
+            throw new MusicApiException("GET $endpoint failed: " . $response->body(), $response->status());
         }
 
         return $response->json();
@@ -25,7 +26,7 @@ abstract class AbstractMusicHttpService
             ->post($this->buildUrl($endpoint), $data);
 
         if (!$response->successful()) {
-            throw new RuntimeException("POST $endpoint failed: " . $response->body());
+            throw new MusicApiException("GET $endpoint failed: " . $response->body(), $response->status());
         }
 
         return $response->json();

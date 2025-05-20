@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    /**
+     * Register User
+     *
+     * Create a new user account and return an authentication token.
+     */
     public function register(RegisterRequest $request): JsonResponse
     {
         $user = User::create([
@@ -28,6 +33,11 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Login
+     *
+     * Authenticate a user and return an access token if credentials are valid.
+     */
     public function login(LoginRequest $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
@@ -47,6 +57,11 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Logout
+     *
+     * Revoke the current user's access token and log them out.
+     */
     public function logout(): JsonResponse
     {
         Auth::user()->currentAccessToken()->delete();

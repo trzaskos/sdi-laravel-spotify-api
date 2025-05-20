@@ -52,68 +52,168 @@ Authorization: Bearer your-token-here
 
 ```json
 {
-    "info": {
-        "name": "SDi Laravel Spotify API – Auth",
-        "_postman_id": "12345678-90ab-cdef-1234-567890abcdef",
-        "description": "Auth endpoints for SDi Laravel Spotify API",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
-        {
-            "name": "Register",
-            "request": {
-                "method": "POST",
-                "header": [
-                    { "key": "Content-Type", "value": "application/json" }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n  \"name\": \"Mary Dev\",\n  \"email\": \"mary@example.com\",\n  \"password\": \"12345678\",\n  \"password_confirmation\": \"12345678\"\n}"
-                },
-                "url": {
-                    "raw": "http://localhost/api/auth/register",
-                    "protocol": "http",
-                    "host": ["localhost"],
-                    "path": ["api", "auth", "register"]
-                }
-            }
+  "info": {
+    "name": "SDi Laravel Spotify API – Auth & Music",
+    "_postman_id": "12345678-90ab-cdef-1234-567890abcdef",
+    "description": "Authentication and music endpoints for SDi Laravel Spotify API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Mary Dev\",\n  \"email\": \"mary@example.com\",\n  \"password\": \"12345678\",\n  \"password_confirmation\": \"12345678\"\n}"
         },
-        {
-            "name": "Login",
-            "request": {
-                "method": "POST",
-                "header": [
-                    { "key": "Content-Type", "value": "application/json" }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n  \"email\": \"mary@example.com\",\n  \"password\": \"12345678\"\n}"
-                },
-                "url": {
-                    "raw": "http://localhost/api/auth/login",
-                    "protocol": "http",
-                    "host": ["localhost"],
-                    "path": ["api", "auth", "login"]
-                }
-            }
-        },
-        {
-            "name": "Logout",
-            "request": {
-                "method": "POST",
-                "header": [
-                    { "key": "Authorization", "value": "Bearer {token}" },
-                    { "key": "Content-Type", "value": "application/json" }
-                ],
-                "url": {
-                    "raw": "http://localhost/api/auth/logout",
-                    "protocol": "http",
-                    "host": ["localhost"],
-                    "path": ["api", "auth", "logout"]
-                }
-            }
+        "url": {
+          "raw": "http://localhost/api/auth/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "auth", "register"]
         }
-    ]
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"mary@example.com\",\n  \"password\": \"12345678\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {token}" },
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost/api/auth/logout",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "auth", "logout"]
+        }
+      }
+    },
+    {
+      "name": "Search Artists",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {token}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost/api/music/artists?query=drake&source=spotify",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "music", "artists"],
+          "query": [
+            { "key": "query", "value": "drake" },
+            { "key": "source", "value": "spotify" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Search Tracks",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {token}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost/api/music/tracks?query=love&source=spotify",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "music", "tracks"],
+          "query": [
+            { "key": "query", "value": "love" },
+            { "key": "source", "value": "spotify" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Track by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {token}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost/api/music/tracks/{id}?source=spotify",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "music", "tracks", "{id}"],
+          "query": [
+            { "key": "source", "value": "spotify" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Albums by Artist",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {token}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost/api/music/artists/{id}/albums?source=spotify",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "music", "artists", "{id}", "albums"],
+          "query": [
+            { "key": "source", "value": "spotify" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Top Tracks by Artist",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {token}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost/api/music/artists/{id}/top-tracks?source=spotify",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "music", "artists", "{id}", "top-tracks"],
+          "query": [
+            { "key": "source", "value": "spotify" }
+          ]
+        }
+      }
+    }
+  ]
 }
 ```
 

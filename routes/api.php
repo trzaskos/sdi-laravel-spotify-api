@@ -12,5 +12,5 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware('auth:sanctum')->prefix('music')->group(function () {
     Route::get('/artists', [MusicController::class, 'searchArtists']);
-    Route::get('/playlists/{id}', [MusicController::class, 'getPlaylist']);
+    Route::get('/playlist/{id}', [MusicController::class, 'getPlaylist']);
 });

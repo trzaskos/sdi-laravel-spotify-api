@@ -4,35 +4,16 @@ namespace App\Services\Clients;
 
 use App\DataTransferObjects\ArtistDTO;
 use App\DataTransferObjects\PlaylistDTO;
+use App\Enums\MusicSource;
 use App\Enums\SpotifyEndpoints;
 use App\Services\Contracts\MusicServiceInterface;
-use App\Services\Shared\AbstractMusicHttpService;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
-use RuntimeException;
+use App\Services\Shared\BaseMusicServiceWithToken;
 
-class SpotifyService extends AbstractMusicHttpService implements MusicServiceInterface
+class SpotifyService extends BaseMusicServiceWithToken implements MusicServiceInterface
 {
-    protected function token(): string
+    public function __construct()
     {
-        return Cache::remember('spotify_token', now()->addMinutes(50), function () {
-            $response = Http::asForm()->post(config('services.spotify.token_url'), [
-                'grant_type' => 'client_credentials',
-                'client_id' => config('services.spotify.client_id'),
-                'client_secret' => config('services.spotify.client_secret'),
-            ]);
-
-            if (!$response->successful()) {
-                throw new RuntimeException('Failed to authenticate with Spotify API.');
-            }
-
-            return $response->json('access_token');
-        });
-    }
-
-    protected function buildUrl(string $endpoint): string
-    {
-        return rtrim(config('services.spotify.api_url'), '/') . '/' . ltrim($endpoint, '/');
+        parent::__construct(MusicSource::SPOTIFY);
     }
 
     public function searchArtist(string $query): array

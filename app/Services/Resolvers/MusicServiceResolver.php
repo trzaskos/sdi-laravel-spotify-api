@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Resolvers;
 
 use App\Enums\MusicSource;
+use App\Services\Clients\SpotifyService;
+use App\Services\Contracts\MusicServiceInterface;
 use InvalidArgumentException;
 
 class MusicServiceResolver

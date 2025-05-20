@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Clients;
 
+use App\Services\Contracts\MusicServiceInterface;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;

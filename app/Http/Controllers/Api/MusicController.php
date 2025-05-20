@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\MusicSource;
 use App\Http\Controllers\Controller;
-use App\Services\MusicServiceInterface;
-use App\Services\MusicServiceResolver;
+use App\Services\Contracts\MusicServiceInterface;
+use App\Services\Resolvers\MusicServiceResolver;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

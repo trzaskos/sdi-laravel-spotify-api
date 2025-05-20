@@ -3,7 +3,7 @@
 This is a technical challenge developed for SDi, using Laravel 11 and Sail. It connects with the Spotify API and implements clean architecture and documentation standards.
 
 ## 🛠️ Stack
-- Laravel 11
+- Laravel 12
 - Sail (Docker)
 - Breeze + Livewire
 - Sanctum (Auth)

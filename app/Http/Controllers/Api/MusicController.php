@@ -50,4 +50,47 @@ class MusicController extends Controller
             return response()->json(['message' => $ex->getMessage()], $ex->getCode() ?: 500);
         }
     }
+
+    public function searchTracks(Request $request): JsonResponse
+    {
+        $query = $request->query('query');
+
+        if (!$query) {
+            return response()->json(['error' => 'Missing query parameter'], 422);
+        }
+
+        return response()->json(
+            $this->musicService->searchTrack($query)
+        );
+    }
+
+    public function getTrack(string $id): JsonResponse
+    {
+        try {
+            $track = $this->musicService->getTrack($id);
+            return response()->json($track);
+        } catch (MusicApiException $ex) {
+            return response()->json(['message' => $ex->getMessage()], $ex->getCode() ?: 500);
+        }
+    }
+
+    public function getAlbumsByArtist(string $id): JsonResponse
+    {
+        try {
+            $albums = $this->musicService->getAlbumsByArtist($id);
+            return response()->json($albums);
+        } catch (MusicApiException $ex) {
+            return response()->json(['message' => $ex->getMessage()], $ex->getCode() ?: 500);
+        }
+    }
+
+    public function getTopTracksByArtist(string $id): JsonResponse
+    {
+        try {
+            $tracks = $this->musicService->getTopTracksByArtist($id);
+            return response()->json($tracks);
+        } catch (MusicApiException $ex) {
+            return response()->json(['message' => $ex->getMessage()], $ex->getCode() ?: 500);
+        }
+    }
 }

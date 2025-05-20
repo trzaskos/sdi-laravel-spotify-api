@@ -2,6 +2,8 @@
 
 namespace App\Services\Contracts;
 
+use App\DataTransferObjects\PlaylistDTO;
+
 interface MusicServiceInterface
 {
     /**
@@ -16,7 +18,7 @@ interface MusicServiceInterface
      * Get a public playlist by ID.
      *
      * @param string $playlistId
-     * @return array
+     * @return PlaylistDTO
      */
-    public function getPlaylist(string $playlistId): array;
+    public function getPlaylist(string $playlistId): PlaylistDTO;
 }

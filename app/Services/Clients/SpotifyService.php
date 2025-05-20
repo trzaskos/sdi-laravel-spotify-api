@@ -2,21 +2,18 @@
 
 namespace App\Services\Clients;
 
+use App\DataTransferObjects\ArtistDTO;
+use App\DataTransferObjects\PlaylistDTO;
+use App\Enums\SpotifyEndpoints;
 use App\Services\Contracts\MusicServiceInterface;
+use App\Services\Shared\AbstractMusicHttpService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
-class SpotifyService implements MusicServiceInterface
+class SpotifyService extends AbstractMusicHttpService implements MusicServiceInterface
 {
-    protected string $token;
-
-    public function __construct()
-    {
-        $this->token = $this->getAccessToken();
-    }
-
-    protected function getAccessToken(): string
+    protected function token(): string
     {
         return Cache::remember('spotify_token', now()->addMinutes(50), function () {
             $response = Http::asForm()->post(config('services.spotify.token_url'), [
@@ -33,31 +30,28 @@ class SpotifyService implements MusicServiceInterface
         });
     }
 
-    public function searchArtist(string $query): array
+    protected function buildUrl(string $endpoint): string
     {
-        $response = Http::withToken($this->token)
-            ->get(config('services.spotify.api_url') . '/search', [
-                'q' => $query,
-                'type' => 'artist',
-                'limit' => 10,
-            ]);
-
-        if (!$response->successful()) {
-            throw new RuntimeException('Error fetching artist from Spotify.');
-        }
-
-        return $response->json('artists.items');
+        return rtrim(config('services.spotify.api_url'), '/') . '/' . ltrim($endpoint, '/');
     }
 
-    public function getPlaylist(string $playlistId): array
+    public function searchArtist(string $query): array
     {
-        $response = Http::withToken($this->token)
-            ->get(config('services.spotify.api_url') . "/playlists/{$playlistId}");
+        $data = $this->get(SpotifyEndpoints::SEARCH->value, [
+            'q' => $query,
+            'type' => 'artist',
+            'limit' => 10,
+        ]);
 
-        if (!$response->successful()) {
-            throw new RuntimeException('Error fetching playlist from Spotify.');
-        }
+        return collect($data['artists']['items'])
+            ->map(fn($item) => ArtistDTO::fromSpotify($item))
+            ->all();
+    }
 
-        return $response->json();
+    public function getPlaylist(string $playlistId): PlaylistDTO
+    {
+        $data = $this->get(SpotifyEndpoints::PLAYLIST->withId($playlistId));
+
+        return PlaylistDTO::fromSpotify($data);
     }
 }

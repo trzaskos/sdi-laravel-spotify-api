@@ -1,1 +1,29 @@
+# Laravel
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
 .env
+.env.*.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+/.idea
+/.vscode
+/.phpunit.cache
+
+# macOS
+.DS_Store
+
+# Composer PHAR
+composer.phar
+
+# NPM
+npm-debug.log
+yarn-error.log
+
+# VSCode Test Snapshots
+__snapshots__/
+
+# Laravel Telescope & Horizon (se estiver usando)
+storage/logs/*.log

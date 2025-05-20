@@ -26,7 +26,10 @@ abstract class BaseMusicServiceWithToken extends AbstractMusicHttpService
             ]);
 
             if (!$response->successful()) {
-                throw new MusicApiException("Failed to authenticate with {$this->source->value} API.");
+                throw new MusicApiException(
+                    "Failed to authenticate with {$this->source->value} API.",
+                    $response->status()
+                );
             }
 
             return $response->json('access_token');

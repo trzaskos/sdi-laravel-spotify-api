@@ -28,7 +28,15 @@ class MusicController extends Controller
         $this->musicService = $this->musicResolver->resolve($source);
     }
 
-    public function searchArtists(Request $request): JsonResponse
+    /**
+     * Search Artist
+     *
+     * Search for an artist by name using the specified music provider.
+     *
+     * This endpoint searches for artists using a query string. You can optionally specify the music provider (source).
+     *
+     */
+    public function searchArtist(Request $request): JsonResponse
     {
         $query = $request->query('query');
 
@@ -41,6 +49,11 @@ class MusicController extends Controller
         );
     }
 
+    /**
+     * Get Playlist
+     *
+     * Retrieve a playlist by ID using the specified music provider.
+     */
     public function getPlaylist(string $id): JsonResponse
     {
         try {
@@ -51,6 +64,11 @@ class MusicController extends Controller
         }
     }
 
+    /**
+     * Search Tracks
+     *
+     * Search for tracks by name using the specified music provider.
+     */
     public function searchTracks(Request $request): JsonResponse
     {
         $query = $request->query('query');
@@ -64,6 +82,11 @@ class MusicController extends Controller
         );
     }
 
+    /**
+     * Get Track
+     *
+     * Retrieve a track by ID using the specified music provider.
+     */
     public function getTrack(string $id): JsonResponse
     {
         try {
@@ -74,6 +97,11 @@ class MusicController extends Controller
         }
     }
 
+    /**
+     * Get Albums by Artist
+     *
+     * Retrieve all albums for a specific artist using the specified music provider.
+     */
     public function getAlbumsByArtist(string $id): JsonResponse
     {
         try {
@@ -84,6 +112,11 @@ class MusicController extends Controller
         }
     }
 
+    /**
+     * Get Top Tracks by Artist
+     *
+     * Retrieve the top tracks for a specific artist using the specified music provider.
+     */
     public function getTopTracksByArtist(string $id): JsonResponse
     {
         try {

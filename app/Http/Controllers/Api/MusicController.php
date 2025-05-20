@@ -9,6 +9,9 @@ use App\Services\Contracts\MusicServiceInterface;
 use App\Services\Resolvers\MusicServiceResolver;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\SearchArtistRequest;
+use App\Http\Requests\SearchTracksRequest;
+use App\Http\Requests\BaseMusicByIdRequest;
 
 class MusicController extends Controller
 {
@@ -36,16 +39,11 @@ class MusicController extends Controller
      * This endpoint searches for artists using a query string. You can optionally specify the music provider (source).
      *
      */
-    public function searchArtist(Request $request): JsonResponse
+    public function searchArtist(SearchArtistRequest $request): JsonResponse
     {
-        $query = $request->query('query');
-
-        if (!$query) {
-            return response()->json(['error' => 'Missing query parameter'], 422);
-        }
-
+        $validated = $request->validated();
         return response()->json(
-            $this->musicService->searchArtist($query)
+            $this->musicService->searchArtist($validated['query'])
         );
     }
 
@@ -54,7 +52,7 @@ class MusicController extends Controller
      *
      * Retrieve a playlist by ID using the specified music provider.
      */
-    public function getPlaylist(string $id): JsonResponse
+    public function getPlaylist(BaseMusicByIdRequest $request, string $id): JsonResponse
     {
         try {
             $playlist = $this->musicService->getPlaylist($id);
@@ -69,16 +67,11 @@ class MusicController extends Controller
      *
      * Search for tracks by name using the specified music provider.
      */
-    public function searchTracks(Request $request): JsonResponse
+    public function searchTracks(SearchTracksRequest $request): JsonResponse
     {
-        $query = $request->query('query');
-
-        if (!$query) {
-            return response()->json(['error' => 'Missing query parameter'], 422);
-        }
-
+        $validated = $request->validated();
         return response()->json(
-            $this->musicService->searchTrack($query)
+            $this->musicService->searchTrack($validated['query'])
         );
     }
 
@@ -87,7 +80,7 @@ class MusicController extends Controller
      *
      * Retrieve a track by ID using the specified music provider.
      */
-    public function getTrack(string $id): JsonResponse
+    public function getTrack(BaseMusicByIdRequest $request, string $id): JsonResponse
     {
         try {
             $track = $this->musicService->getTrack($id);
@@ -102,7 +95,7 @@ class MusicController extends Controller
      *
      * Retrieve all albums for a specific artist using the specified music provider.
      */
-    public function getAlbumsByArtist(string $id): JsonResponse
+    public function getAlbumsByArtist(BaseMusicByIdRequest $request, string $id): JsonResponse
     {
         try {
             $albums = $this->musicService->getAlbumsByArtist($id);
@@ -117,7 +110,7 @@ class MusicController extends Controller
      *
      * Retrieve the top tracks for a specific artist using the specified music provider.
      */
-    public function getTopTracksByArtist(string $id): JsonResponse
+    public function getTopTracksByArtist(BaseMusicByIdRequest $request, string $id): JsonResponse
     {
         try {
             $tracks = $this->musicService->getTopTracksByArtist($id);

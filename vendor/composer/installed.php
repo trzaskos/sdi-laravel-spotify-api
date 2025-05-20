@@ -3,7 +3,7 @@
         'name' => 'laravel/livewire-starter-kit',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '8ef5f3988efcd2df6fd3661394fc598e483d7fd1',
+        'reference' => 'd5041a729526ee83757dc1dae58d0340032d02b8',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -388,7 +388,7 @@
         'laravel/livewire-starter-kit' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8ef5f3988efcd2df6fd3661394fc598e483d7fd1',
+            'reference' => 'd5041a729526ee83757dc1dae58d0340032d02b8',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -438,6 +438,15 @@
             'install_path' => __DIR__ . '/../laravel/serializable-closure',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'laravel/telescope' => array(
+            'pretty_version' => 'v5.7.0',
+            'version' => '5.7.0.0',
+            'reference' => '440908cb856cfbef9323244f7978ad4bf8cd2daa',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/telescope',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'laravel/tinker' => array(
             'pretty_version' => 'v2.10.1',

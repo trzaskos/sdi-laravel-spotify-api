@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 
 class Handler extends ExceptionHandler
 {
@@ -26,6 +27,11 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'error' => $e->getMessage(),
             ], $e->getCode() ?: 500);
+        });
+        $this->renderable(function (ThrottleRequestsException $e, $request) {
+            return response()->json([
+                'message' => 'You have exceeded the request limit. Please try again in a few moments.',
+            ], 429);
         });
     }
 }
